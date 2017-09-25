@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import 'rxjs/add/operator/map';
+
 
 /**
  * Generated class for the QuizPage page.
@@ -19,8 +21,42 @@ export class QuizPage {
 
   private querstionFive = [];
   private category;
+  private FiveHighQuestion = {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  "id": "1",
+  "created": "2017-08-08",
+  "updated": "2017-08-08",
+  "category": "sports",
+  "subcategory": "hockey",
+  "title": "All Time NHL Goal Scorers",
+  "question_01": "Wayne Gretzky",
+  "question_02": "Gordie Howe",
+  "question_03": "Jaromir Jagr",
+  "question_04": "Brett Hull",
+  "question_05": "Marcel Dionne",
+  "answer_01": 894,
+  "answer_02": 801,
+  "answer_03": 765,
+  "answer_04": 741,
+  "answer_05": 731,
+  "source": "http://www.quanthockey.com/nhl/records/nhl-players-all-time-goals-leaders.html"
+
+  };
+
+
+  constructor(private navController: NavController,
+              public navParams: NavParams,
+              public alertCtrl: AlertController,
+              private dragulaService: DragulaService) {
+
+    dragulaService.drop.subscribe((value) => {
+      let alert = this.alertCtrl.create({
+        title: 'Item moved',
+        subTitle: 'So much fun!',
+        buttons: ['OK']
+      });
+      alert.present();
+     });
   }
 
   ionViewDidLoad() {
