@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "created": "2017-08-08",
+    "updated": "2017-08-08",
+    "category": "sports",
+    "subcategory": "hockey",
+    "title": "All Time NHL Goal Scorers",
+    "one": "Wayne Gretzky:894",
+    "two": "Gordie Howe:801",
+    "three": "Jaromir Jagr:765",
+    "four": "Brett Hull:741",
+    "five": "Marcel Dionne:731",
+    "source": "http://www.quanthockey.com/nhl/records/nhl-players-all-time-goals-leaders.html"
+  },
+  {
+    "id": "2",
+    "created": "2017-07-08",
+    "updated": "2017-07-08",
+    "category": "sports",
+    "subcategory": "basketball",
+    "title": "All Time NBA Points Leaders",
+    "one": "Kareem Abdul-Jabbar:38,387",
+    "two": "Karl Malone:36,928",
+    "three": "Kobe Bryant:33,643",
+    "four": "Michael Jordan:32,292",
+    "five": "Wilt Chamberlain:31,419",
+    "source": "http://www.espn.com/nba/history/leaders"
+  },
+  {
+    "id": "3",
+    "created": "2017-07-08",
+    "updated": "2017-07-08",
+    "category": "sports",
+    "subcategory": "soccer",
+    "title": "Top 10 goalscorers of all time",
+    "one": "Arthur Friedenreich:1,329",
+    "two": "Pele:1,281",
+    "three": "Josef Bican:805",
+    "four": "Romario743",
+    "five": "Gerd Muller:711",
+    "source": "https://www.sportskeeda.com/football/top-10-goalscorers-of-all-time/5"
+  },
+  {
+    "id": "4",
+    "created": "2017-07-08",
+    "updated": "2017-07-08",
+    "category": "sports",
+    "subcategory": "soccer",
+    "title": "Most career goals scored in football",
+    "one": "Christiano Ronaldo:573",
+    "two": "Lionel Messi:548",
+    "three": "Zlatan Ibrahimovic:472",
+    "four": "Samual Etos:389",
+    "five": "David Villa:388",
+    "source": "https://talksport.com/football/most-career-goals-scored-football-top-10-including-lionel-messi-cristiano-ronaldo-zlatan?p=0"
+  },
+  {
+    "id": "5",
+    "created": "2017-07-08",
+    "updated": "2017-07-08",
+    "category": "sports",
+    "subcategory": "hockey",
+    "title": "Most Stanley Cup Wins by Team",
+    "one": "Montreal Canadiens:23",
+    "two": "Toronto Maple Leafs:13",
+    "three": "Boston Bruins:6",
+    "four": "Edmonton Oilers:5",
+    "five": "New York Rangers:4",
+    "source": "https://www.thoughtco.com/most-stanley-cup-wins-by-team-2779436"
+  }
+]

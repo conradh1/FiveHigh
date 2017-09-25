@@ -1,0 +1,18 @@
+ [
+      {
+        "name": "Sports",
+        "status": "active"
+      },
+      {
+        "name": "Politics",
+        "status": "disabled"
+      },
+      {
+        "name": "Engineering",
+        "status": "disabled"
+      },
+      {
+        "name": "Science",
+        "status": "disabled"
+      }
+  ]
