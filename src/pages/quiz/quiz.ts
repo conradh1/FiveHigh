@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { Http } from '@angular/http';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import 'rxjs/add/operator/map';
 
@@ -19,7 +18,6 @@ import 'rxjs/add/operator/map';
 })
 export class QuizPage {
 
-  private querstionFive = [];
   private category;
   private FiveHighQuestion = {
 
@@ -57,6 +55,14 @@ export class QuizPage {
       });
       alert.present();
      });
+
+     constructor(private dragulaService: DragulaService) {
+    dragulaService.setOptions('my-bag', {
+      copy: true,
+      moves: function (el, container, handle) {
+        return container.id !== 'no-drop';
+      }
+    });
   }
 
   ionViewDidLoad() {

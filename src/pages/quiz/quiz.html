@@ -19,20 +19,25 @@
       <ion-col col-6>Category: {{ category }}</ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>Title: {{ FiveHighQuestion.title }}</ion-col>
-    </ion-row>
-    <ion-row [dragula]='"my-bag"' [dragulaModel]="answers">
-      <ion-col col-2>
-        <button ion-item detail-none>
-         999
-        </button>
+      <ion-col col-2 class="top">
+        <ion-list class="top"[dragula]='"my-bag"' [dragulaModel]="answers">
+          99
+          <button ion-item detail-none>
+
+          </button>
+        </ion-list>
       </ion-col>
     </ion-row>
-    <ion-row [dragula]='"my-bag"' [dragulaModel]="questions">
-      <ion-col col-2>
-        <button ion-item detail-none>
-        Wayne
-        </button>
+    <ion-row>
+      <ion-col col-6>Title: {{ FiveHighQuestion.title }}</ion-col>
+    </ion-row >
+    <ion-row>
+      <ion-col col-2 class="bottom">
+        <ion-list id='no-drop' [dragula]='"my-bag"' [dragulaModel]="questions">
+          <button ion-item detail-none>
+            Wayne
+          </button>
+        </ion-list>
       </ion-col>
     </ion-row>
 
