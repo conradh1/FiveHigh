@@ -71,11 +71,18 @@ export class QuizPage {
       revertOnSpill: true
     });
 
-      //this.getQuestions();
   }
 
+  getQuestions(){
+    this.dataProvider.getQuestions().subscribe((data)=>{
+          this.questions = data; //.filter(question => question.id === '2')
+    },error=>{
+      console.log(error);// Error getting the data
+    });
+  }
   ionViewDidLoad() {
     this.category = this.navParams.get('category').name;
+    //this.getQuestions();
     console.log('ionViewDidLoad QuizPage');
   }
 
