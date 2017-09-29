@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import 'rxjs/add/operator/map';
 
@@ -19,7 +20,9 @@ import 'rxjs/add/operator/map';
 export class QuizPage {
 
   private category;
-  private FiveHighQuestion = {
+
+  public questions: any;
+  private quizQuestion = {
 
   "id": "1",
   "created": "2017-08-08",
@@ -45,7 +48,11 @@ export class QuizPage {
   constructor(private navController: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
-              private dragulaService: DragulaService) {
+              private dragulaService: DragulaService,
+              private dataProvider: DataProvider) {
+
+    const bag: any = this.dragulaService.find('my-bag');
+    if (bag !== undefined ) this.dragulaService.destroy('my-bag');
 
     dragulaService.drop.subscribe((value) => {
       let alert = this.alertCtrl.create({
@@ -56,18 +63,21 @@ export class QuizPage {
       alert.present();
      });
 
-     constructor(private dragulaService: DragulaService) {
     dragulaService.setOptions('my-bag', {
-      copy: true,
+      copy: false,
       moves: function (el, container, handle) {
         return container.id !== 'no-drop';
-      }
+      },
+      revertOnSpill: true
     });
+
+      //this.getQuestions();
   }
 
   ionViewDidLoad() {
     this.category = this.navParams.get('category').name;
     console.log('ionViewDidLoad QuizPage');
   }
+
 
 }

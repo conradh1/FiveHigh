@@ -21,4 +21,8 @@ export class DataProvider {
   getCategories() {
     return  this.http.get('data/categories.json').map(res => res.json());
   }
+
+  getQuestions() {
+    return  this.http.get('data/sports.json').map(res => res.json());
+  }
 }

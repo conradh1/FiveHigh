@@ -64,6 +64,12 @@ var QuizPage = (function () {
             });
             alert.present();
         });
+        dragulaService.setOptions('my-bag', {
+            copy: false,
+            moves: function (el, container, handle) {
+                return container.id !== 'no-drop';
+            }
+        });
     }
     QuizPage.prototype.ionViewDidLoad = function () {
         this.category = this.navParams.get('category').name;
@@ -74,7 +80,7 @@ var QuizPage = (function () {
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>Category: {{ category }}</ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2 class="top">\n        <ion-list [dragula]=\'"my-bag"\' [dragulaModel]="answers">\n          99\n          <button ion-item detail-none>\n\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Title: {{ FiveHighQuestion.title }}</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="bottom">\n        <ion-list id=\'no-drop\' [dragula]=\'"my-bag"\' [dragulaModel]="questions">\n          <button ion-item detail-none>\n            Wayne\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n\n\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>Category: {{ category }}</ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2 class="top">\n        <ion-list id=\'no-drop\' [dragula]=\'"my-bag"\' [dragulaModel]="answers">\n          99\n          <button ion-item detail-none>\n\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Title: {{ FiveHighQuestion.title }}</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="bottom">\n        <ion-list  [dragula]=\'"my-bag"\' [dragulaModel]="questions">\n          <button ion-item detail-none>\n            Wayne\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n\n\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
