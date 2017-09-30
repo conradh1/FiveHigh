@@ -51,6 +51,16 @@ export class QuizPage {
               private dragulaService: DragulaService,
               private dataProvider: DataProvider) {
 
+    const bag: any = this.dragulaService.find('quiz-bag');
+    if (bag !== undefined ) this.dragulaService.destroy('quiz-bag');
+    
+    dragulaService.setOptions('quiz-bag', {
+      copy: false,
+      moves: function (el, container, handle) {
+        return container.id !== 'no-drop';
+      },
+      revertOnSpill: true
+    });
     dragulaService.drag.subscribe((value) => {
       this.onDrag(value.slice(1));
     });
@@ -103,7 +113,7 @@ export class QuizPage {
   getQuestions(){
     this.dataProvider.getQuestions().subscribe((data)=>{
           // filter by current question
-          this.questions = data.filter(question => question.id === '2');
+          this.questions = data.filter(question => question.id === '1');
     },error=>{
       console.log(error);// Error getting the data
     });

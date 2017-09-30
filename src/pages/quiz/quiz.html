@@ -23,7 +23,7 @@
     </ion-row >
     <ion-row>
       <ion-col col-2 class="container">
-        <ion-list id='no-drop' [dragula]='"quiz-bag"' [dragulaModel]="answers">
+        <ion-list id='no-drop' [dragula]='"quiz-bag"'>
           {{ quizQuestion.answer_01 }}
         </ion-list>
       </ion-col>
@@ -33,15 +33,12 @@
     </ion-row >
     <ion-row>
       <ion-col col-2 class="container">
-        <ion-list  [dragula]='"quiz-bag"' [dragulaModel]="questions">
+        <ion-list  [dragula]='"quiz-bag"'>
           <button ion-item detail-none>
             {{ quizQuestion.question_01 }}
           </button>
         </ion-list>
       </ion-col>
     </ion-row>
-    <ion-list *ngFor="let question of questions">
-       {{ question.title }}
-     </ion-list>
   </ion-grid>
 </ion-content>
