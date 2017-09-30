@@ -14,28 +14,28 @@
 
 
 <ion-content padding>
-  <ion-grid>
+  <ion-grid class="wrapper">
     <ion-row>
       <ion-col col-6>Category: {{ category }} </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-2 class="top">
-        <ion-list id='no-drop' [dragula]='"my-bag"' [dragulaModel]="answers">
-          99
-          <button ion-item detail-none>
-
-          </button>
-        </ion-list>
-      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>Title: {{ quizQuestion.title }}</ion-col>
     </ion-row >
     <ion-row>
-      <ion-col col-2 class="bottom">
-        <ion-list  [dragula]='"my-bag"' [dragulaModel]="questions">
+      <ion-col col-2 class="container">
+        <ion-list id='no-drop' [dragula]='"quiz-bag"' [dragulaModel]="answers">
+          {{ quizQuestion.answer_01 }}
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>Place with the answer above</ion-col>
+    </ion-row >
+    <ion-row>
+      <ion-col col-2 class="container">
+        <ion-list  [dragula]='"quiz-bag"' [dragulaModel]="questions">
           <button ion-item detail-none>
-            Wayne
+            {{ quizQuestion.question_01 }}
           </button>
         </ion-list>
       </ion-col>

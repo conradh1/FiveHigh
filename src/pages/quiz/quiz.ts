@@ -51,38 +51,66 @@ export class QuizPage {
               private dragulaService: DragulaService,
               private dataProvider: DataProvider) {
 
-    const bag: any = this.dragulaService.find('my-bag');
-    if (bag !== undefined ) this.dragulaService.destroy('my-bag');
-
+    dragulaService.drag.subscribe((value) => {
+      this.onDrag(value.slice(1));
+    });
     dragulaService.drop.subscribe((value) => {
-      let alert = this.alertCtrl.create({
-        title: 'Item moved',
-        subTitle: 'So much fun!',
-        buttons: ['OK']
-      });
-      alert.present();
-     });
-
-    dragulaService.setOptions('my-bag', {
-      copy: false,
-      moves: function (el, container, handle) {
-        return container.id !== 'no-drop';
-      },
-      revertOnSpill: true
+      this.onDrop(value.slice(1));
+    });
+    dragulaService.over.subscribe((value) => {
+      this.onOver(value.slice(1));
+    });
+    dragulaService.out.subscribe((value) => {
+      this.onOut(value.slice(1));
     });
 
   }
+  private hasClass(el: any, name: string) {
+   return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
+ }
 
+ private addClass(el: any, name: string) {
+   if (!this.hasClass(el, name)) {
+     el.className = el.className ? [el.className, name].join(' ') : name;
+   }
+ }
+
+ private removeClass(el: any, name: string) {
+   if (this.hasClass(el, name)) {
+     el.className = el.className.replace(new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)', 'g'), '');
+   }
+ }
+
+ private onDrag(args) {
+   let [e, el] = args;
+   this.removeClass(e, 'ex-moved');
+ }
+
+ private onDrop(args) {
+   let [e, el] = args;
+   this.addClass(e, 'ex-moved');
+ }
+
+ private onOver(args) {
+   let [e, el, container] = args;
+   this.addClass(el, 'ex-over');
+ }
+
+ private onOut(args) {
+   let [e, el, container] = args;
+   this.removeClass(el, 'ex-over');
+ }
   getQuestions(){
     this.dataProvider.getQuestions().subscribe((data)=>{
-          this.questions = data; //.filter(question => question.id === '2')
+          // filter by current question
+          this.questions = data.filter(question => question.id === '2');
     },error=>{
       console.log(error);// Error getting the data
     });
   }
   ionViewDidLoad() {
     this.category = this.navParams.get('category').name;
-    //this.getQuestions();
+    this.getQuestions();
     console.log('ionViewDidLoad QuizPage');
   }
 
