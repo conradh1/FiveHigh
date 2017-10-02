@@ -59,36 +59,70 @@ var QuizPage = (function () {
             "answer_05": 731,
             "source": "http://www.quanthockey.com/nhl/records/nhl-players-all-time-goals-leaders.html"
         };
-        var bag = this.dragulaService.find('my-bag');
+        var bag = this.dragulaService.find('quiz-bag');
         if (bag !== undefined)
-            this.dragulaService.destroy('my-bag');
-        dragulaService.drop.subscribe(function (value) {
-            var alert = _this.alertCtrl.create({
-                title: 'Item moved',
-                subTitle: 'So much fun!',
-                buttons: ['OK']
-            });
-            alert.present();
-        });
-        dragulaService.setOptions('my-bag', {
+            this.dragulaService.destroy('quiz-bag');
+        dragulaService.setOptions('quiz-bag', {
             copy: false,
             moves: function (el, container, handle) {
                 return container.id !== 'no-drop';
             },
             revertOnSpill: true
         });
+        dragulaService.drag.subscribe(function (value) {
+            _this.onDrag(value.slice(1));
+        });
+        dragulaService.drop.subscribe(function (value) {
+            _this.onDrop(value.slice(1));
+        });
+        dragulaService.over.subscribe(function (value) {
+            _this.onOver(value.slice(1));
+        });
+        dragulaService.out.subscribe(function (value) {
+            _this.onOut(value.slice(1));
+        });
     }
+    QuizPage.prototype.hasClass = function (el, name) {
+        return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
+    };
+    QuizPage.prototype.addClass = function (el, name) {
+        if (!this.hasClass(el, name)) {
+            el.className = el.className ? [el.className, name].join(' ') : name;
+        }
+    };
+    QuizPage.prototype.removeClass = function (el, name) {
+        if (this.hasClass(el, name)) {
+            el.className = el.className.replace(new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)', 'g'), '');
+        }
+    };
+    QuizPage.prototype.onDrag = function (args) {
+        var e = args[0], el = args[1];
+        this.removeClass(e, 'ex-moved');
+    };
+    QuizPage.prototype.onDrop = function (args) {
+        var e = args[0], el = args[1];
+        this.addClass(e, 'ex-moved');
+    };
+    QuizPage.prototype.onOver = function (args) {
+        var e = args[0], el = args[1], container = args[2];
+        this.addClass(el, 'ex-over');
+    };
+    QuizPage.prototype.onOut = function (args) {
+        var e = args[0], el = args[1], container = args[2];
+        this.removeClass(el, 'ex-over');
+    };
     QuizPage.prototype.getQuestions = function () {
         var _this = this;
         this.dataProvider.getQuestions().subscribe(function (data) {
-            _this.questions = data; //.filter(question => question.id === '2')
+            // filter by current question
+            _this.questions = data.filter(function (question) { return question.id === '1'; });
         }, function (error) {
             console.log(error); // Error getting the data
         });
     };
     QuizPage.prototype.ionViewDidLoad = function () {
         this.category = this.navParams.get('category').name;
-        //this.getQuestions();
+        this.getQuestions();
         console.log('ionViewDidLoad QuizPage');
     };
     return QuizPage;
@@ -96,7 +130,7 @@ var QuizPage = (function () {
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2 class="top">\n        <ion-list id=\'no-drop\' [dragula]=\'"my-bag"\' [dragulaModel]="answers">\n          99\n          <button ion-item detail-none>\n\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Title: {{ quizQuestion.title }}</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="bottom">\n        <ion-list  [dragula]=\'"my-bag"\' [dragulaModel]="questions">\n          <button ion-item detail-none>\n            Wayne\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-list *ngFor="let question of questions">\n       {{ question.title }}\n     </ion-list>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper">\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Title: {{ quizQuestion.title }}</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container">\n        <ion-list id=\'no-drop\' [dragula]=\'"quiz-bag"\'>\n          {{ quizQuestion.answer_01 }}\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Place with the answer above</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container">\n        <ion-list  [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none>\n            {{ quizQuestion.question_01 }}\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],

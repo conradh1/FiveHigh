@@ -20,6 +20,7 @@ import 'rxjs/add/operator/map';
 export class QuizPage {
 
   private category;
+  private ques_no;
 
   public questions: any;
   private quizQuestion = {
@@ -53,7 +54,7 @@ export class QuizPage {
 
     const bag: any = this.dragulaService.find('quiz-bag');
     if (bag !== undefined ) this.dragulaService.destroy('quiz-bag');
-    
+
     dragulaService.setOptions('quiz-bag', {
       copy: false,
       moves: function (el, container, handle) {
@@ -110,17 +111,18 @@ export class QuizPage {
    let [e, el, container] = args;
    this.removeClass(el, 'ex-over');
  }
-  getQuestions(){
+  getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{
           // filter by current question
-          this.questions = data.filter(question => question.id === '1');
+          this.questions = data.filter(question => question.id === '1');   //filter(question => question.id === "'"+this.ques_no+"'");
     },error=>{
       console.log(error);// Error getting the data
     });
   }
   ionViewDidLoad() {
     this.category = this.navParams.get('category').name;
-    this.getQuestions();
+    this.ques_no = this.navParams.get('ques_no');
+    this.getQuestions(this.ques_no);
     console.log('ionViewDidLoad QuizPage');
   }
 

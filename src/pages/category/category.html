@@ -16,7 +16,7 @@
 <ion-content padding>
   Pick a Category:
   <ion-list *ngFor="let category of categories">
-    <button ion-button (click)="gotoQuiz(category)">
+    <button ion-button (click)="gotoQuiz(category,1)">
     {{ category.name }}
   </button>
   </ion-list>

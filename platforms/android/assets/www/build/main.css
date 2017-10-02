@@ -25199,6 +25199,14 @@ ion-navbar.toolbar {
   }
 }
 
+page-quiz {
+  /* dragula-specific example page styles */
+  /*
+   * note that styling gu-mirror directly is a bad practice because it's too generic.
+   * you're better off giving the draggable elements a unique class and styling that directly!
+   */
+}
+
 page-quiz .header {
   height: 30px;
   padding-left: 5px;
@@ -25206,12 +25214,56 @@ page-quiz .header {
   text-align: center;
 }
 
-page-quiz .top {
-  border: 1px solid #000000;
-  padding: 0px;
+page-quiz .wrapper {
+  display: table;
 }
 
-page-quiz .bottom {
-  border: 1px solid #AAAAAA;
-  padding: 0px;
+page-quiz .container {
+  display: table-cell;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 50%;
+}
+
+page-quiz .container:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+page-quiz .container div,
+page-quiz .gu-mirror {
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+
+page-quiz .container div {
+  cursor: move;
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+page-quiz .gu-mirror {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+page-quiz .container .ex-moved {
+  background-color: #e74c3c;
+}
+
+page-quiz .container.ex-over {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+page-quiz .handle {
+  padding: 0 5px;
+  margin-right: 5px;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: move;
+}
+
+page-quiz nested-repeat-example .container span {
+  display: block;
+  padding: 8px;
 }

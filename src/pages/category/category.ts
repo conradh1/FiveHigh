@@ -19,7 +19,7 @@ export class CategoryPage {
 
   categories = [];
   public quizPage = QuizPage;
-  
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private dataProvider: DataProvider) {
@@ -37,9 +37,10 @@ export class CategoryPage {
     });
   }
 
-  public gotoQuiz(category){
+  public gotoQuiz(category, ques_no){
     this.navCtrl.push(this.quizPage,{
-      category: category
+      category: category,
+      ques_no: ques_no
     });
   }
 

@@ -111,18 +111,19 @@ var QuizPage = (function () {
         var e = args[0], el = args[1], container = args[2];
         this.removeClass(el, 'ex-over');
     };
-    QuizPage.prototype.getQuestions = function () {
+    QuizPage.prototype.getQuestions = function (ques_no) {
         var _this = this;
         this.dataProvider.getQuestions().subscribe(function (data) {
             // filter by current question
-            _this.questions = data.filter(function (question) { return question.id === '1'; });
+            _this.questions = data.filter(function (question) { return question.id === '1'; }); //filter(question => question.id === "'"+this.ques_no+"'");
         }, function (error) {
             console.log(error); // Error getting the data
         });
     };
     QuizPage.prototype.ionViewDidLoad = function () {
         this.category = this.navParams.get('category').name;
-        this.getQuestions();
+        this.ques_no = this.navParams.get('ques_no');
+        this.getQuestions(this.ques_no);
         console.log('ionViewDidLoad QuizPage');
     };
     return QuizPage;
@@ -130,7 +131,7 @@ var QuizPage = (function () {
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper">\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Title: {{ quizQuestion.title }}</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container">\n        <ion-list id=\'no-drop\' [dragula]=\'"quiz-bag"\'>\n          {{ quizQuestion.answer_01 }}\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Place with the answer above</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container">\n        <ion-list  [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none>\n            {{ quizQuestion.question_01 }}\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>{{ ques_no }}). {{ quizQuestion.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container" id=\'no-drop\' [dragula]=\'"quiz-bag"\'>\n        <button ion-item detail-none >\n          {{ question.answer_01 }}\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Place with the answer above</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container" [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.question_01 }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n   <ion-list *ngFor="let question of questions">\n    {{ question.title }}\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */]) === "function" && _e || Object])
 ], QuizPage);
@@ -186,9 +187,10 @@ var CategoryPage = (function () {
             _this.categories = data;
         });
     };
-    CategoryPage.prototype.gotoQuiz = function (category) {
+    CategoryPage.prototype.gotoQuiz = function (category, ques_no) {
         this.navCtrl.push(this.quizPage, {
-            category: category
+            category: category,
+            ques_no: ques_no
         });
     };
     return CategoryPage;
@@ -196,13 +198,12 @@ var CategoryPage = (function () {
 CategoryPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-category',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/'<!--\n  Generated template for the CategoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Category</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  Pick a Category:\n  <ion-list *ngFor="let category of categories">\n    <button ion-button (click)="gotoQuiz(category)">\n    {{ category.name }}\n  </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/,
+        selector: 'page-category',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/'<!--\n  Generated template for the CategoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Category</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  Pick a Category:\n  <ion-list *ngFor="let category of categories">\n    <button ion-button (click)="gotoQuiz(category,1)">\n    {{ category.name }}\n  </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */]) === "function" && _c || Object])
 ], CategoryPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=category.js.map
 
 /***/ }),
