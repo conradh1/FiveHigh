@@ -22,6 +22,8 @@ export class QuizPage {
   private category;
   private ques_no;
 
+  public score
+
   public questions: any;
   private quizQuestion = {
 
@@ -58,15 +60,33 @@ export class QuizPage {
     dragulaService.setOptions('quiz-bag', {
       copy: false,
       moves: function (el, container, handle) {
-        return container.id !== 'no-drop';
+        // find the id to determine if the user can drag or not.
+        var id = container.id;
+        return id.search(/target_/i);
       },
-      revertOnSpill: true
+      accepts: function(el, target, source, sibling) {
+        // Two rules to note here:
+        // 1) A source cannot be dragged into a source.
+        // 2) A target cannot only accept one child target.
+        var id = target.id;
+        if (id.search(/target_/i) ||
+           target.children.length > 2) {
+          return false;
+        }
+        else {
+          return true;
+        }
+      },
+      revertOnSpill: true,
+      direction: 'vertical'
     });
     dragulaService.drag.subscribe((value) => {
       this.onDrag(value.slice(1));
     });
-    dragulaService.drop.subscribe((value) => {
+    dragulaService.drop.subscribe((value: any) => {
       this.onDrop(value.slice(1));
+      const [e,el, target, source]  = value;
+      console.log("debug SOURCE"+source.id+" TARGET:"+target.id);
     });
     dragulaService.over.subscribe((value) => {
       this.onOver(value.slice(1));
@@ -98,7 +118,7 @@ export class QuizPage {
  }
 
  private onDrop(args) {
-   let [e, el] = args;
+   let [e,el, target, source] = args;
    this.addClass(e, 'ex-moved');
  }
 

@@ -21,9 +21,16 @@
       <ion-col col-6>{{ ques_no }}). {{ quizQuestion.title }} </ion-col>
     </ion-row >
     <ion-row>
-      <ion-col col-2 class="container" id='no-drop' [dragula]='"quiz-bag"'>
+      <ion-col col-2  class="container" id='target_01' [dragula]='"quiz-bag"'>
         <button ion-item detail-none >
-          {{ question.answer_01 }}
+          {{ question.target_01 }}
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2  class="container" id='target_02' [dragula]='"quiz-bag"'>
+        <button ion-item detail-none >
+          {{ question.target_02 }}
         </button>
       </ion-col>
     </ion-row>
@@ -31,9 +38,16 @@
       <ion-col col-6>Place with the answer above</ion-col>
     </ion-row >
     <ion-row>
-      <ion-col col-2 class="container" [dragula]='"quiz-bag"'>
+      <ion-col col-2 class="container" id='source_02' [dragula]='"quiz-bag"'>
           <button ion-item detail-none >
-            {{ question.question_01 }}
+            {{ question.source_01 }}
+          </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2 class="container" id='source_02' [dragula]='"quiz-bag"'>
+          <button ion-item detail-none >
+            {{ question.source_02 }}
           </button>
       </ion-col>
     </ion-row>
