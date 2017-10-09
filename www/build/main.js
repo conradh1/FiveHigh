@@ -40,24 +40,14 @@ var QuizPage = (function () {
         this.alertCtrl = alertCtrl;
         this.dragulaService = dragulaService;
         this.dataProvider = dataProvider;
-        this.quizQuestion = {
-            "id": "1",
-            "created": "2017-08-08",
-            "updated": "2017-08-08",
-            "category": "sports",
-            "subcategory": "hockey",
-            "title": "All Time NHL Goal Scorers",
-            "question_01": "Wayne Gretzky",
-            "question_02": "Gordie Howe",
-            "question_03": "Jaromir Jagr",
-            "question_04": "Brett Hull",
-            "question_05": "Marcel Dionne",
-            "answer_01": 894,
-            "answer_02": 801,
-            "answer_03": 765,
-            "answer_04": 741,
-            "answer_05": 731,
-            "source": "http://www.quanthockey.com/nhl/records/nhl-players-all-time-goals-leaders.html"
+        this.moves = 0;
+        this.results = {
+            // -1, 0, or 1  unanswered, incorrect, correct
+            "target_01": -1,
+            "target_02": -1,
+            "target_03": -1,
+            "target_04": -1,
+            "target_05": -1
         };
         var bag = this.dragulaService.find('quiz-bag');
         if (bag !== undefined)
@@ -91,7 +81,24 @@ var QuizPage = (function () {
         dragulaService.drop.subscribe(function (value) {
             _this.onDrop(value.slice(1));
             var e = value[0], el = value[1], target = value[2], source = value[3];
-            console.log("debug SOURCE" + source.id + " TARGET:" + target.id);
+            _this.moves++;
+            var sourceList = source.id.split("_");
+            var targetList = target.id.split("_");
+            if (sourceList[1] == targetList[1]) {
+                _this.results[target.id] = 1; // response correct
+            }
+            else {
+                _this.results[target.id] = 0; // response incorrect
+            }
+            console.log("debug SOURCE" + source.id + " TARGET:" + target.id + " moves" + _this.moves + "score" + _this.results[target.id]);
+            var alert = _this.alertCtrl.create({
+                title: 'Question Complete',
+                subTitle: 'FiveHigh',
+                buttons: ['OK']
+            });
+            if (_this.moves == 2) {
+                alert.present();
+            }
         });
         dragulaService.over.subscribe(function (value) {
             _this.onOver(value.slice(1));
@@ -149,7 +156,7 @@ var QuizPage = (function () {
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>{{ ques_no }}). {{ quizQuestion.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2  class="container" id=\'target_01\' [dragula]=\'"quiz-bag"\'>\n        <button ion-item detail-none >\n          {{ question.target_01 }}\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2  class="container" id=\'target_02\' [dragula]=\'"quiz-bag"\'>\n        <button ion-item detail-none >\n          {{ question.target_02 }}\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Place with the answer above</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container" id=\'source_02\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_01 }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2 class="container" id=\'source_02\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_02 }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n   <ion-list *ngFor="let question of questions">\n    {{ question.title }}\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>{{ ques_no }}). {{ quizQuestion.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2  class="container" id=\'target_01\' [dragula]=\'"quiz-bag"\'>\n        <button ion-item detail-none >\n          {{ question.target_01 }}\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2  class="container" id=\'target_02\' [dragula]=\'"quiz-bag"\'>\n        <button ion-item detail-none >\n          {{ question.target_02 }}\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Place with the answer above</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container" id=\'source_01\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_01 }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-2 class="container" id=\'source_02\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_02 }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n   <ion-list *ngFor="let question of questions">\n    {{ question.title }}\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */]) === "function" && _e || Object])
 ], QuizPage);

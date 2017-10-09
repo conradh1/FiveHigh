@@ -21,32 +21,21 @@ export class QuizPage {
 
   private category;
   private ques_no;
+  private moves = 0;
+
+  public results = {
+   // -1, 0, or 1  unanswered, incorrect, correct
+   "target_01": -1,
+   "target_02": -1,
+   "target_03": -1,
+   "target_04": -1,
+   "target_05": -1
+  };
 
   public score
 
   public questions: any;
-  private quizQuestion = {
-
-  "id": "1",
-  "created": "2017-08-08",
-  "updated": "2017-08-08",
-  "category": "sports",
-  "subcategory": "hockey",
-  "title": "All Time NHL Goal Scorers",
-  "question_01": "Wayne Gretzky",
-  "question_02": "Gordie Howe",
-  "question_03": "Jaromir Jagr",
-  "question_04": "Brett Hull",
-  "question_05": "Marcel Dionne",
-  "answer_01": 894,
-  "answer_02": 801,
-  "answer_03": 765,
-  "answer_04": 741,
-  "answer_05": 731,
-  "source": "http://www.quanthockey.com/nhl/records/nhl-players-all-time-goals-leaders.html"
-
-  };
-
+  
 
   constructor(private navController: NavController,
               public navParams: NavParams,
@@ -86,7 +75,28 @@ export class QuizPage {
     dragulaService.drop.subscribe((value: any) => {
       this.onDrop(value.slice(1));
       const [e,el, target, source]  = value;
-      console.log("debug SOURCE"+source.id+" TARGET:"+target.id);
+      this.moves++;
+      var sourceList = source.id.split("_");
+      var targetList = target.id.split("_");
+
+      if (sourceList[1] == targetList[1]) {
+        this.results[target.id] = 1 // response correct
+      }
+      else {
+        this.results[target.id] = 0; // response incorrect
+      }
+      console.log("debug SOURCE"+source.id+" TARGET:"+target.id+" moves"+this.moves+"score"+this.results[target.id]);
+
+
+
+      let alert = this.alertCtrl.create({
+        title: 'Question Complete',
+        subTitle: 'FiveHigh',
+        buttons: ['OK']
+      });
+      if ( this.moves == 2 ){
+        alert.present();
+      }
     });
     dragulaService.over.subscribe((value) => {
       this.onOver(value.slice(1));
