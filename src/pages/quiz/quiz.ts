@@ -35,7 +35,7 @@ export class QuizPage {
   public score
 
   public questions: any;
-  
+
 
   constructor(private navController: NavController,
               public navParams: NavParams,
@@ -144,7 +144,11 @@ export class QuizPage {
   getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{
           // filter by current question
-          this.questions = data.filter(question => question.id === '1');   //filter(question => question.id === "'"+this.ques_no+"'");
+          //this.questions = data.filter(question => question.id === '1');
+          console.log("debug getQuestions"+ques_no);
+          this.questions = data.filter((question) => {
+            return question.id == ques_no;
+          });
     },error=>{
       console.log(error);// Error getting the data
     });

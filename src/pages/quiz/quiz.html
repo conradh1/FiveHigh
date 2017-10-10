@@ -18,7 +18,7 @@
       <ion-col col-6>Category: {{ category }} </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>{{ ques_no }}). {{ quizQuestion.title }} </ion-col>
+      <ion-col col-6>{{ ques_no }}). {{ question.title }} </ion-col>
     </ion-row >
     <ion-row>
       <ion-col col-2  class="container" id='target_01' [dragula]='"quiz-bag"'>
@@ -52,7 +52,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-   <ion-list *ngFor="let question of questions">
-    {{ question.title }}
-  </ion-list>
 </ion-content>
