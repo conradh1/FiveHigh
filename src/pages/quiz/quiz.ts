@@ -56,10 +56,9 @@ export class QuizPage {
       accepts: function(el, target, source, sibling) {
         // Two rules to note here:
         // 1) A source cannot be dragged into a source.
-        // 2) A target cannot only accept one child target.
+        // 2) A target cannot only accept one child target.        
         var id = target.id;
-        if (id.search(/target_/i) ||
-           target.children.length > 2) {
+        if (target.children.length > 2) {
           return false;
         }
         else {
@@ -67,7 +66,7 @@ export class QuizPage {
         }
       },
       revertOnSpill: true,
-      direction: 'vertical'
+      direction: 'horizontal'
     });
     dragulaService.drag.subscribe((value) => {
       this.onDrag(value.slice(1));
@@ -86,8 +85,6 @@ export class QuizPage {
         this.results[target.id] = 0; // response incorrect
       }
       console.log("debug SOURCE"+source.id+" TARGET:"+target.id+" moves"+this.moves+"score"+this.results[target.id]);
-
-
 
       let alert = this.alertCtrl.create({
         title: 'Question Complete',
