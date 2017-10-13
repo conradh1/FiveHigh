@@ -35,7 +35,7 @@ export class QuizPage {
   public score
 
   public questions: any;
-
+  public sources: any;
 
   constructor(private navController: NavController,
               public navParams: NavParams,
@@ -56,7 +56,7 @@ export class QuizPage {
       accepts: function(el, target, source, sibling) {
         // Two rules to note here:
         // 1) A source cannot be dragged into a source.
-        // 2) A target cannot only accept one child target.        
+        // 2) A target cannot only accept one child target.
         var id = target.id;
         if (target.children.length > 2) {
           return false;
@@ -138,13 +138,50 @@ export class QuizPage {
    let [e, el, container] = args;
    this.removeClass(el, 'ex-over');
  }
+
+ private randomize_sources(question: any) {
+
+   var tmp = [];
+   this.sources = [
+      { id: 'source_01', name: question.source_01},
+      { id: 'source_02', name: question.source_02},
+      { id: 'source_03', name: question.source_03},
+      { id: 'source_04', name: question.source_04},
+      { id: 'source_05', name: question.source_05}
+
+   ];
+   /*#################### TO DO: MAKE RNDOM LOCAL CLASS #####################*/
+   /*for (var i = 5 - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        switch (j) {
+          case 1:
+            this.sources.push( { ['id']: 'source_01', ['name']: question.source_01 });
+            break;
+          case 2:
+            this.sources.push( { ['id']: 'source_02', ['name']: question.source_02 });
+            break;
+          case 3:
+            this.sources.push( { ['id']: 'source_03', ['name']: question.source_03 });
+            break;
+          case 4:
+            this.sources.push( { ['id']: 'source_04', ['name']: question.source_04 });
+            break;
+          case 5:
+            this.sources.push( { ['id']: 'source_05', ['name']: question.source_05 });
+            break;
+        }
+    }*/
+ }
   getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{
           // filter by current question
-          //this.questions = data.filter(question => question.id === '1');
-          console.log("debug getQuestions"+ques_no);
+          //console.log("debug getQuestions"+ques_no);
           this.questions = data.filter((question) => {
-            return question.id == ques_no;
+            if (question.id == ques_no ) {
+              // assign sources to
+              this.randomize_sources(question);
+              return true;
+            }
           });
     },error=>{
       console.log(error);// Error getting the data
@@ -155,6 +192,7 @@ export class QuizPage {
     this.ques_no = this.navParams.get('ques_no');
     this.getQuestions(this.ques_no);
     console.log('ionViewDidLoad QuizPage');
+
   }
 
 

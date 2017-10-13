@@ -45,4 +45,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-list *ngFor="let source of sources">
+    {{ source.id }}  name: {{source.name}}
+  </ion-list>
 </ion-content>

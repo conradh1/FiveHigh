@@ -62,7 +62,7 @@ var QuizPage = (function () {
             accepts: function (el, target, source, sibling) {
                 // Two rules to note here:
                 // 1) A source cannot be dragged into a source.
-                // 2) A target cannot only accept one child target.        
+                // 2) A target cannot only accept one child target.
                 var id = target.id;
                 if (target.children.length > 2) {
                     return false;
@@ -135,14 +135,48 @@ var QuizPage = (function () {
         var e = args[0], el = args[1], container = args[2];
         this.removeClass(el, 'ex-over');
     };
+    QuizPage.prototype.randomize_sources = function (question) {
+        var tmp = [];
+        this.sources = [
+            { id: 'source_01', name: question.source_01 },
+            { id: 'source_02', name: question.source_02 },
+            { id: 'source_03', name: question.source_03 },
+            { id: 'source_04', name: question.source_04 },
+            { id: 'source_05', name: question.source_05 }
+        ];
+        /*#################### TO DO: MAKE RNDOM LOCAL CLASS #####################*/
+        /*for (var i = 5 - 1; i > 0; i--) {
+             var j = Math.floor(Math.random() * (i + 1));
+             switch (j) {
+               case 1:
+                 this.sources.push( { ['id']: 'source_01', ['name']: question.source_01 });
+                 break;
+               case 2:
+                 this.sources.push( { ['id']: 'source_02', ['name']: question.source_02 });
+                 break;
+               case 3:
+                 this.sources.push( { ['id']: 'source_03', ['name']: question.source_03 });
+                 break;
+               case 4:
+                 this.sources.push( { ['id']: 'source_04', ['name']: question.source_04 });
+                 break;
+               case 5:
+                 this.sources.push( { ['id']: 'source_05', ['name']: question.source_05 });
+                 break;
+             }
+         }*/
+    };
     QuizPage.prototype.getQuestions = function (ques_no) {
         var _this = this;
         this.dataProvider.getQuestions().subscribe(function (data) {
             // filter by current question
-            //this.questions = data.filter(question => question.id === '1');
-            console.log("debug getQuestions" + ques_no);
+            //console.log("debug getQuestions"+ques_no);
             _this.questions = data.filter(function (question) {
-                return question.id == ques_no;
+                if (question.id == ques_no) {
+                    // assign sources to
+                    _this.randomize_sources(question);
+                    return true;
+                }
             });
         }, function (error) {
             console.log(error); // Error getting the data
@@ -159,7 +193,7 @@ var QuizPage = (function () {
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ ques_no }}). {{ question.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col class="container" id=\'target_01\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_01 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'source_01\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_01 }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_02\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_02 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'source_02\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_02 }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ ques_no }}). {{ question.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col class="container" id=\'target_01\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_01 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'source_01\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_01 }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_02\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_02 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'source_02\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_02 }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-list *ngFor="let source of sources">\n    {{ source.id }}  name: {{source.name}}\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */]) === "function" && _e || Object])
 ], QuizPage);
@@ -226,7 +260,7 @@ var CategoryPage = (function () {
 CategoryPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-category',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/'<!--\n  Generated template for the CategoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Category</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  Pick a Category:\n  <ion-list *ngFor="let category of categories">\n    <button ion-button (click)="gotoQuiz(category,1)">\n    {{ category.name }}\n  </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/,
+        selector: 'page-category',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/category/category.html"*/'<!--\n  Generated template for the CategoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Category</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  Pick a Category:\n  <ion-list *ngFor="let category of categories">\n    <button ion-button (click)="gotoQuiz(category,1)">\n    {{ category.name }}\n  </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/category/category.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -315,7 +349,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Welcome to FiveHigh!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Test your knowledge on the Top Five of Everything!\n  <p>\n    <button ion-button [navPush]="categoryPage">Let\'s get Started!</button>\n  </p>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Welcome to FiveHigh!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Test your knowledge on the Top Five of Everything!\n  <p>\n    <button ion-button [navPush]="categoryPage">Let\'s get Started!</button>\n  </p>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
 ], HomePage);
@@ -455,7 +489,7 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
