@@ -17,17 +17,20 @@ import 'rxjs/add/operator/map';
   selector: 'page-quiz',
   templateUrl: 'quiz.html',
 })
+
 export class QuizPage {
 
   public score
 
-  public questions: any;
-  private category;
-  private ques_no;
-  private moves = 0;
+  public questions: any;  // contains question object
+  private category; // category name
+  private ques_no; // current question
+  private moves = 0;  // counts number of drag/drops
+  private FIVEHIGH = 5;
 
-  public random = [1,2,3,4,5];
-  
+  public random = [1,2,3,4,5];  //used to randomly assign sources
+
+
   public results = {
    // -1, 0, or 1  unanswered, incorrect, correct
    "target_01": -1,
@@ -91,7 +94,7 @@ export class QuizPage {
         subTitle: 'FiveHigh',
         buttons: ['OK']
       });
-      if ( this.moves == 2 ){
+      if ( this.moves == this.FIVEHIGH ){
         alert.present();
       }
     });

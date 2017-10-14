@@ -40,8 +40,9 @@ var QuizPage = (function () {
         this.alertCtrl = alertCtrl;
         this.dragulaService = dragulaService;
         this.dataProvider = dataProvider;
-        this.moves = 0;
-        this.random = [1, 2, 3, 4, 5];
+        this.moves = 0; // counts number of drag/drops
+        this.FIVEHIGH = 5;
+        this.random = [1, 2, 3, 4, 5]; //used to randomly assign sources
         this.results = {
             // -1, 0, or 1  unanswered, incorrect, correct
             "target_01": -1,
@@ -96,7 +97,7 @@ var QuizPage = (function () {
                 subTitle: 'FiveHigh',
                 buttons: ['OK']
             });
-            if (_this.moves == 2) {
+            if (_this.moves == _this.FIVEHIGH) {
                 alert.present();
             }
         });
