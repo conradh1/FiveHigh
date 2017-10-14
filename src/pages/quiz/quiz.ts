@@ -35,7 +35,7 @@ export class QuizPage {
   public score
 
   public questions: any;
-  public sources: any;
+  public sources = new Array();
 
   constructor(private navController: NavController,
               public navParams: NavParams,
@@ -141,36 +141,36 @@ export class QuizPage {
 
  private randomize_sources(question: any) {
 
-   var tmp = [];
-   this.sources = [
-      { id: 'source_01', name: question.source_01},
-      { id: 'source_02', name: question.source_02},
-      { id: 'source_03', name: question.source_03},
-      { id: 'source_04', name: question.source_04},
-      { id: 'source_05', name: question.source_05}
+   var random = [1,2,3,4,5];
 
-   ];
-   /*#################### TO DO: MAKE RNDOM LOCAL CLASS #####################*/
-   /*for (var i = 5 - 1; i > 0; i--) {
+   // place array in random order
+   for (var i = random.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        switch (j) {
+        var temp = random[i];
+        random[i] = random[j];
+        random[j] = temp;
+    }
+
+   // reassign sources in teh new random order
+   for (var i = 0; i < random.length; i++) {
+        switch (random[i]) {
           case 1:
-            this.sources.push( { ['id']: 'source_01', ['name']: question.source_01 });
+            this.sources.push( { 'id': 'source_01', 'name': question.source_01 });
             break;
           case 2:
-            this.sources.push( { ['id']: 'source_02', ['name']: question.source_02 });
+            this.sources.push( { 'id': 'source_02', 'name': question.source_02 });
             break;
           case 3:
-            this.sources.push( { ['id']: 'source_03', ['name']: question.source_03 });
+            this.sources.push( { 'id': 'source_03', 'name': question.source_03 });
             break;
           case 4:
-            this.sources.push( { ['id']: 'source_04', ['name']: question.source_04 });
+            this.sources.push( { 'id': 'source_04', 'name': question.source_04 });
             break;
           case 5:
-            this.sources.push( { ['id']: 'source_05', ['name']: question.source_05 });
+            this.sources.push( { 'id': 'source_05', 'name': question.source_05 });
             break;
         }
-    }*/
+    }
  }
   getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{

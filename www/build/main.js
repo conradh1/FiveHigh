@@ -49,6 +49,7 @@ var QuizPage = (function () {
             "target_04": -1,
             "target_05": -1
         };
+        this.sources = new Array();
         var bag = this.dragulaService.find('quiz-bag');
         if (bag !== undefined)
             this.dragulaService.destroy('quiz-bag');
@@ -136,35 +137,34 @@ var QuizPage = (function () {
         this.removeClass(el, 'ex-over');
     };
     QuizPage.prototype.randomize_sources = function (question) {
-        var tmp = [];
-        this.sources = [
-            { id: 'source_01', name: question.source_01 },
-            { id: 'source_02', name: question.source_02 },
-            { id: 'source_03', name: question.source_03 },
-            { id: 'source_04', name: question.source_04 },
-            { id: 'source_05', name: question.source_05 }
-        ];
-        /*#################### TO DO: MAKE RNDOM LOCAL CLASS #####################*/
-        /*for (var i = 5 - 1; i > 0; i--) {
-             var j = Math.floor(Math.random() * (i + 1));
-             switch (j) {
-               case 1:
-                 this.sources.push( { ['id']: 'source_01', ['name']: question.source_01 });
-                 break;
-               case 2:
-                 this.sources.push( { ['id']: 'source_02', ['name']: question.source_02 });
-                 break;
-               case 3:
-                 this.sources.push( { ['id']: 'source_03', ['name']: question.source_03 });
-                 break;
-               case 4:
-                 this.sources.push( { ['id']: 'source_04', ['name']: question.source_04 });
-                 break;
-               case 5:
-                 this.sources.push( { ['id']: 'source_05', ['name']: question.source_05 });
-                 break;
-             }
-         }*/
+        var random = [1, 2, 3, 4, 5];
+        // place array in random order
+        for (var i = random.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = random[i];
+            random[i] = random[j];
+            random[j] = temp;
+        }
+        // reassign sources in teh new random order
+        for (var i = 0; i < random.length; i++) {
+            switch (random[i]) {
+                case 1:
+                    this.sources.push({ 'id': 'source_01', 'name': question.source_01 });
+                    break;
+                case 2:
+                    this.sources.push({ 'id': 'source_02', 'name': question.source_02 });
+                    break;
+                case 3:
+                    this.sources.push({ 'id': 'source_03', 'name': question.source_03 });
+                    break;
+                case 4:
+                    this.sources.push({ 'id': 'source_04', 'name': question.source_04 });
+                    break;
+                case 5:
+                    this.sources.push({ 'id': 'source_05', 'name': question.source_05 });
+                    break;
+            }
+        }
     };
     QuizPage.prototype.getQuestions = function (ques_no) {
         var _this = this;
