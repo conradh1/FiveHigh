@@ -41,6 +41,7 @@ var QuizPage = (function () {
         this.dragulaService = dragulaService;
         this.dataProvider = dataProvider;
         this.moves = 0;
+        this.random = [1, 2, 3, 4, 5];
         this.results = {
             // -1, 0, or 1  unanswered, incorrect, correct
             "target_01": -1,
@@ -49,7 +50,6 @@ var QuizPage = (function () {
             "target_04": -1,
             "target_05": -1
         };
-        this.sources = new Array();
         var bag = this.dragulaService.find('quiz-bag');
         if (bag !== undefined)
             this.dragulaService.destroy('quiz-bag');
@@ -136,35 +136,30 @@ var QuizPage = (function () {
         var e = args[0], el = args[1], container = args[2];
         this.removeClass(el, 'ex-over');
     };
-    QuizPage.prototype.randomize_sources = function (question) {
-        var random = [1, 2, 3, 4, 5];
-        // place array in random order
-        for (var i = random.length - 1; i > 0; i--) {
+    QuizPage.prototype.randomize = function () {
+        // place array in this.random order
+        for (var i = this.random.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
-            var temp = random[i];
-            random[i] = random[j];
-            random[j] = temp;
+            var temp = this.random[i];
+            this.random[i] = this.random[j];
+            this.random[j] = temp;
         }
-        // reassign sources in teh new random order
-        for (var i = 0; i < random.length; i++) {
-            switch (random[i]) {
-                case 1:
-                    this.sources.push({ 'id': 'source_01', 'name': question.source_01 });
-                    break;
-                case 2:
-                    this.sources.push({ 'id': 'source_02', 'name': question.source_02 });
-                    break;
-                case 3:
-                    this.sources.push({ 'id': 'source_03', 'name': question.source_03 });
-                    break;
-                case 4:
-                    this.sources.push({ 'id': 'source_04', 'name': question.source_04 });
-                    break;
-                case 5:
-                    this.sources.push({ 'id': 'source_05', 'name': question.source_05 });
-                    break;
-            }
+    };
+    QuizPage.prototype.getSource = function (id, question) {
+        // returns the source name based on id (-1 for 0 index)
+        switch (id) {
+            case 1:
+                return question.source_01;
+            case 2:
+                return question.source_02;
+            case 3:
+                return question.source_03;
+            case 4:
+                return question.source_04;
+            case 5:
+                return question.source_05;
         }
+        return "";
     };
     QuizPage.prototype.getQuestions = function (ques_no) {
         var _this = this;
@@ -173,8 +168,7 @@ var QuizPage = (function () {
             //console.log("debug getQuestions"+ques_no);
             _this.questions = data.filter(function (question) {
                 if (question.id == ques_no) {
-                    // assign sources to
-                    _this.randomize_sources(question);
+                    // assign sources to array
                     return true;
                 }
             });
@@ -186,6 +180,7 @@ var QuizPage = (function () {
         this.category = this.navParams.get('category').name;
         this.ques_no = this.navParams.get('ques_no');
         this.getQuestions(this.ques_no);
+        this.randomize();
         console.log('ionViewDidLoad QuizPage');
     };
     return QuizPage;
@@ -193,7 +188,7 @@ var QuizPage = (function () {
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ ques_no }}). {{ question.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col class="container" id=\'target_01\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_01 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'source_01\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_01 }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_02\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_02 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'source_02\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ question.source_02 }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-list *ngFor="let source of sources">\n    {{ source.id }}  name: {{source.name}}\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ ques_no }}). {{ question.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col class="container" id=\'target_01\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_01 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_0{{random[0]}} \' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[0],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_02\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_02 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_0{{random[1]}} \' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[1],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_03\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_03 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_0{{random[2]}}\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[2],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_04\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_04 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_0{{random[3]}}\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[3],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_05\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_05 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_0{{random[4]}}\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[4],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__["DragulaService"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */]) === "function" && _e || Object])
 ], QuizPage);

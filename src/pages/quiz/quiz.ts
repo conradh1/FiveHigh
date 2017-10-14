@@ -19,10 +19,15 @@ import 'rxjs/add/operator/map';
 })
 export class QuizPage {
 
+  public score
+
+  public questions: any;
   private category;
   private ques_no;
   private moves = 0;
 
+  public random = [1,2,3,4,5];
+  
   public results = {
    // -1, 0, or 1  unanswered, incorrect, correct
    "target_01": -1,
@@ -31,11 +36,6 @@ export class QuizPage {
    "target_04": -1,
    "target_05": -1
   };
-
-  public score
-
-  public questions: any;
-  public sources = new Array();
 
   constructor(private navController: NavController,
               public navParams: NavParams,
@@ -139,38 +139,32 @@ export class QuizPage {
    this.removeClass(el, 'ex-over');
  }
 
- private randomize_sources(question: any) {
+ private randomize() {
 
-   var random = [1,2,3,4,5];
-
-   // place array in random order
-   for (var i = random.length - 1; i > 0; i--) {
+   // place array in this.random order
+   for (var i = this.random.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = random[i];
-        random[i] = random[j];
-        random[j] = temp;
+        var temp = this.random[i];
+        this.random[i] = this.random[j];
+        this.random[j] = temp;
     }
+ }
 
-   // reassign sources in teh new random order
-   for (var i = 0; i < random.length; i++) {
-        switch (random[i]) {
+ private getSource(id, question: any) {
+   // returns the source name based on id (-1 for 0 index)
+   switch (id) {
           case 1:
-            this.sources.push( { 'id': 'source_01', 'name': question.source_01 });
-            break;
+            return question.source_01;
           case 2:
-            this.sources.push( { 'id': 'source_02', 'name': question.source_02 });
-            break;
+            return question.source_02;
           case 3:
-            this.sources.push( { 'id': 'source_03', 'name': question.source_03 });
-            break;
+            return question.source_03;
           case 4:
-            this.sources.push( { 'id': 'source_04', 'name': question.source_04 });
-            break;
+            return question.source_04;
           case 5:
-            this.sources.push( { 'id': 'source_05', 'name': question.source_05 });
-            break;
-        }
+            return question.source_05;
     }
+    return "";
  }
   getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{
@@ -178,8 +172,7 @@ export class QuizPage {
           //console.log("debug getQuestions"+ques_no);
           this.questions = data.filter((question) => {
             if (question.id == ques_no ) {
-              // assign sources to
-              this.randomize_sources(question);
+              // assign sources to array
               return true;
             }
           });
@@ -191,6 +184,7 @@ export class QuizPage {
     this.category = this.navParams.get('category').name;
     this.ques_no = this.navParams.get('ques_no');
     this.getQuestions(this.ques_no);
+    this.randomize();
     console.log('ionViewDidLoad QuizPage');
 
   }

@@ -26,9 +26,9 @@
           {{ question.target_01 }}
         </h4>
       </ion-col>
-      <ion-col class="container" id='source_01' [dragula]='"quiz-bag"'>
+      <ion-col class="container" id='sources_0{{random[0]}} ' [dragula]='"quiz-bag"'>
           <button ion-item detail-none >
-            {{ question.source_01 }}
+            {{ getSource(random[0],question) }}
           </button>
       </ion-col>
     </ion-row>
@@ -38,14 +38,47 @@
           {{ question.target_02 }}
         </h4>
       </ion-col>
-      <ion-col class="container" id='source_02' [dragula]='"quiz-bag"'>
+      <ion-col class="container" id='sources_0{{random[1]}} ' [dragula]='"quiz-bag"'>
           <button ion-item detail-none >
-            {{ question.source_02 }}
+            {{ getSource(random[1],question) }}
+          </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="container" id='target_03' [dragula]='"quiz-bag"'>
+        <h4>
+          {{ question.target_03 }}
+        </h4>
+      </ion-col>
+      <ion-col class="container" id='sources_0{{random[2]}}' [dragula]='"quiz-bag"'>
+          <button ion-item detail-none >
+            {{ getSource(random[2],question) }}
+          </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="container" id='target_04' [dragula]='"quiz-bag"'>
+        <h4>
+          {{ question.target_04 }}
+        </h4>
+      </ion-col>
+      <ion-col class="container" id='sources_0{{random[3]}}' [dragula]='"quiz-bag"'>
+          <button ion-item detail-none >
+            {{ getSource(random[3],question) }}
+          </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="container" id='target_05' [dragula]='"quiz-bag"'>
+        <h4>
+          {{ question.target_05 }}
+        </h4>
+      </ion-col>
+      <ion-col class="container" id='sources_0{{random[4]}}' [dragula]='"quiz-bag"'>
+          <button ion-item detail-none >
+            {{ getSource(random[4],question) }}
           </button>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list *ngFor="let source of sources">
-    {{ source.id }}  name: {{source.name}}
-  </ion-list>
 </ion-content>
