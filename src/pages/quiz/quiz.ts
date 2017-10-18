@@ -30,14 +30,13 @@ export class QuizPage {
 
   public random = [1,2,3,4,5];  //used to randomly assign sources
 
-
   public results = {
-   // -1, 0, or 1  unanswered, incorrect, correct
-   "target_01": -1,
-   "target_02": -1,
-   "target_03": -1,
-   "target_04": -1,
-   "target_05": -1
+   // -1, unanswered > 1 incorrect or correct
+   "1": -1,
+   "2": -1,
+   "3": -1,
+   "4": -1,
+   "5": -1
   };
 
   constructor(private navController: NavController,
@@ -77,7 +76,7 @@ export class QuizPage {
     dragulaService.drop.subscribe((value: any) => {
       this.onDrop(value.slice(1));
       const [e,el, target, source]  = value;
-      this.moves++;
+      /*this.moves++;
       var sourceList = source.id.split("_");
       var targetList = target.id.split("_");
 
@@ -86,15 +85,15 @@ export class QuizPage {
       }
       else {
         this.results[target.id] = 0; // response incorrect
-      }
-      console.log("debug SOURCE"+source.id+" TARGET:"+target.id+" moves"+this.moves+"score"+this.results[target.id]);
+      }*/
+      this.markOnce(source.id, target.id);
 
       let alert = this.alertCtrl.create({
-        title: 'Question Complete',
+        title: this.markAll(),
         subTitle: 'FiveHigh',
         buttons: ['OK']
       });
-      if ( this.moves == this.FIVEHIGH ){
+      if ( this.moves == this.FIVEHIGH ) {
         alert.present();
       }
     });
@@ -142,6 +141,32 @@ export class QuizPage {
    this.removeClass(el, 'ex-over');
  }
 
+private markOnce(source, target) {
+  this.moves++; // increment the number of moves
+
+   // split out source/target_0[1-5]
+  var sourceList = source.split("_");
+  var targetList = target.split("_");
+
+  // mark source with target
+  this.results[targetList[1]] = sourceList[1];
+
+  console.log("debug SOURCE"+source+" TARGET:"+target+" moves"+this.moves+"score"+this.results[targetList[1]]);
+}
+
+private markAll() {
+
+  var msg = "Results ";
+
+  for (let key in this.results) {
+    var value = this.results[key];
+    msg +=  key+") "+value+"\n" ;
+    if ( key == value ) {
+      msg += " correct";
+    }
+  }
+  return msg;
+}
  private randomize() {
 
    // place array in this.random order
@@ -154,20 +179,21 @@ export class QuizPage {
  }
 
  private getSource(id, question: any) {
-   // returns the source name based on id (-1 for 0 index)
+   // returns the source name based on id
    switch (id) {
           case 1:
-            return question.source_01;
+            return question.source_1;
           case 2:
-            return question.source_02;
+            return question.source_2;
           case 3:
-            return question.source_03;
+            return question.source_3;
           case 4:
-            return question.source_04;
+            return question.source_4;
           case 5:
-            return question.source_05;
+            return question.source_5;
     }
     return "";
+
  }
   getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{
