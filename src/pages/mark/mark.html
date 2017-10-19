@@ -7,12 +7,32 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mark</ion-title>
+    <ion-title>FiveHigh Marks</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
- Insert Marks here.
+  <ion-grid class="wrapper" *ngFor="let question of questions">
+    <ion-row>
+      <ion-col>Category: {{ category }} {{ ques_no }}). {{ question.title }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{ question.target_1 }}   {{ question.source_1 }} -> {{ showMark(1, answers["1"],question) }} </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{ question.target_2 }}   {{ question.source_2 }} -> {{ showMark(2, answers["2"],question) }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{ question.target_3 }}   {{ question.source_3 }} -> {{ showMark(3, answers["3"],question) }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{ question.target_4 }}   {{ question.source_4 }} -> {{ showMark(4, answers["4"],question) }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{ question.target_5 }}   {{ question.source_5 }} -> {{ showMark(5, answers["5"],question) }}</ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

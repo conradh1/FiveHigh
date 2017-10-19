@@ -28,20 +28,50 @@ var MarkPage = (function () {
     function MarkPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.answers = {}; // contains question object
     }
+    MarkPage.prototype.showMark = function (question_id, answer_id, question) {
+        // returns the source name based on id
+        var msg = "Correct! :)";
+        if (question_id != answer_id) {
+            msg = "Incorrect. :( Response " + this.getSource(answer_id, question);
+        }
+        return msg;
+    };
+    MarkPage.prototype.getSource = function (id, question) {
+        // returns the source name based on id
+        switch (id) {
+            case "1":
+                return question.source_1;
+            case "2":
+                return question.source_2;
+            case "3":
+                return question.source_3;
+            case "4":
+                return question.source_4;
+            case "5":
+                return question.source_5;
+        }
+        return "Unknown";
+    };
     MarkPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad MarkPage');
+        this.answers = this.navParams.get('answers');
+        this.category = this.navParams.get('category');
+        this.ques_no = this.navParams.get('ques_no');
+        this.questions = this.navParams.get('questions');
     };
     return MarkPage;
 }());
 MarkPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-mark',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/mark/mark.html"*/'<!--\n  Generated template for the MarkPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Mark</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n Insert Marks here.\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/mark/mark.html"*/,
+        selector: 'page-mark',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/mark/mark.html"*/'<!--\n  Generated template for the MarkPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh Marks</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col>Category: {{ category }} {{ ques_no }}). {{ question.title }}</ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ question.target_1 }}   {{ question.source_1 }} -> {{ showMark(1, answers["1"],question) }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ question.target_2 }}   {{ question.source_2 }} -> {{ showMark(2, answers["2"],question) }}</ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ question.target_3 }}   {{ question.source_3 }} -> {{ showMark(3, answers["3"],question) }}</ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ question.target_4 }}   {{ question.source_4 }} -> {{ showMark(4, answers["4"],question) }}</ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ question.target_5 }}   {{ question.source_5 }} -> {{ showMark(5, answers["5"],question) }}</ion-col>\n    </ion-row>\n\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/mark/mark.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object])
 ], MarkPage);
 
+var _a, _b;
 //# sourceMappingURL=mark.js.map
 
 /***/ }),
@@ -217,7 +247,7 @@ var QuizPage = (function () {
             case 5:
                 return question.source_5;
         }
-        return "";
+        return "Unknown";
     };
     QuizPage.prototype.getQuestions = function (ques_no) {
         var _this = this;
@@ -243,7 +273,10 @@ var QuizPage = (function () {
     };
     QuizPage.prototype.gotoMark = function () {
         this.navCtrl.push(this.markPage, {
-            answers: this.answers
+            answers: this.answers,
+            category: this.category,
+            questions: this.questions,
+            ques_no: this.ques_no
         });
     };
     return QuizPage;

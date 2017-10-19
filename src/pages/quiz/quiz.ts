@@ -181,8 +181,7 @@ private mark(source, target) {
           case 5:
             return question.source_5;
     }
-    return "";
-
+    return "Unknown";
  }
   getQuestions(ques_no){
     this.dataProvider.getQuestions().subscribe((data)=>{
@@ -209,7 +208,10 @@ private mark(source, target) {
 
   public gotoMark(){
     this.navCtrl.push(this.markPage,{
-      answers: this.answers
+      answers: this.answers,
+      category: this.category,
+      questions: this.questions,
+      ques_no: this.ques_no
     });
   }
 
