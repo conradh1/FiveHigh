@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { DataProvider } from '../../providers/data/data';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import 'rxjs/add/operator/map';
+import {MarkPage} from '../mark/mark';
 
 
 /**
@@ -26,6 +27,7 @@ export class QuizPage {
   private category; // category name
   private ques_no; // current question
   private results;
+  public markPage = MarkPage;
 
   public random = [1,2,3,4,5];  //used to randomly assign sources
 
@@ -38,7 +40,7 @@ export class QuizPage {
    "5": -1
   };
 
-  constructor(private navController: NavController,
+  constructor(private navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
               private dragulaService: DragulaService,
@@ -57,7 +59,7 @@ export class QuizPage {
       accepts: function(el, target, source, sibling) {
         // Two rules to note here:
         // 1) A source cannot be dragged into a source.
-        // 2) A target cannot only accept one child target.        
+        // 2) A target cannot only accept one child target.
         if (target.children.length > 2) {
           return false;
         }
@@ -203,6 +205,12 @@ private mark(source, target) {
     this.randomize();
     console.log('ionViewDidLoad QuizPage');
 
+  }
+
+  public gotoMark(){
+    this.navCtrl.push(this.markPage,{
+      answers: this.answers
+    });
   }
 
 

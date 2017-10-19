@@ -10,6 +10,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CategoryPage } from '../pages/category/category';
 import { QuizPage } from '../pages/quiz/quiz';
+import { MarkPage } from '../pages/mark/mark';
 import { DataProvider } from '../providers/data/data';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DataProvider } from '../providers/data/data';
     MyApp,
     HomePage,
     CategoryPage,
-    QuizPage
+    QuizPage,
+    MarkPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { DataProvider } from '../providers/data/data';
     MyApp,
     HomePage,
     CategoryPage,
-    QuizPage
+    QuizPage,
+    MarkPage
   ],
   providers: [
     StatusBar,

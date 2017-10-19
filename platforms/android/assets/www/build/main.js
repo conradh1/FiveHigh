@@ -1,17 +1,64 @@
-webpackJsonp([2],{
+webpackJsonp([3],{
 
 /***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MarkPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the MarkPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var MarkPage = (function () {
+    function MarkPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    MarkPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MarkPage');
+    };
+    return MarkPage;
+}());
+MarkPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-mark',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/mark/mark.html"*/'<!--\n  Generated template for the MarkPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Mark</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n Insert Marks here.\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/mark/mark.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+], MarkPage);
+
+//# sourceMappingURL=mark.js.map
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuizPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_data_data__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__ = __webpack_require__(248);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__ = __webpack_require__(249);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_dragula_ng2_dragula__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mark_mark__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -26,6 +73,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the QuizPage page.
  *
@@ -33,31 +81,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var QuizPage = (function () {
-    function QuizPage(navController, navParams, alertCtrl, dragulaService, dataProvider) {
+    function QuizPage(navCtrl, navParams, alertCtrl, dragulaService, dataProvider) {
         var _this = this;
-        this.navController = navController;
+        this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
         this.dragulaService = dragulaService;
         this.dataProvider = dataProvider;
-        this.quizQuestion = {
-            "id": "1",
-            "created": "2017-08-08",
-            "updated": "2017-08-08",
-            "category": "sports",
-            "subcategory": "hockey",
-            "title": "All Time NHL Goal Scorers",
-            "question_01": "Wayne Gretzky",
-            "question_02": "Gordie Howe",
-            "question_03": "Jaromir Jagr",
-            "question_04": "Brett Hull",
-            "question_05": "Marcel Dionne",
-            "answer_01": 894,
-            "answer_02": 801,
-            "answer_03": 765,
-            "answer_04": 741,
-            "answer_05": 731,
-            "source": "http://www.quanthockey.com/nhl/records/nhl-players-all-time-goals-leaders.html"
+        this.markPage = __WEBPACK_IMPORTED_MODULE_5__mark_mark__["a" /* MarkPage */];
+        this.random = [1, 2, 3, 4, 5]; //used to randomly assign sources
+        this.answers = {
+            // -1, unanswered > 1 answered
+            "1": -1,
+            "2": -1,
+            "3": -1,
+            "4": -1,
+            "5": -1
         };
         var bag = this.dragulaService.find('quiz-bag');
         if (bag !== undefined)
@@ -65,15 +104,39 @@ var QuizPage = (function () {
         dragulaService.setOptions('quiz-bag', {
             copy: false,
             moves: function (el, container, handle) {
-                return container.id !== 'no-drop';
+                // find the id to determine if the user can drag or not.
+                var id = container.id;
+                return id.search(/target_/i);
             },
-            revertOnSpill: true
+            accepts: function (el, target, source, sibling) {
+                // Two rules to note here:
+                // 1) A source cannot be dragged into a source.
+                // 2) A target cannot only accept one child target.
+                if (target.children.length > 2) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            },
+            revertOnSpill: true,
+            direction: 'horizontal'
         });
         dragulaService.drag.subscribe(function (value) {
             _this.onDrag(value.slice(1));
         });
         dragulaService.drop.subscribe(function (value) {
             _this.onDrop(value.slice(1));
+            var e = value[0], el = value[1], target = value[2], source = value[3];
+            var marked = _this.mark(source.id, target.id);
+            var alert = _this.alertCtrl.create({
+                title: _this.results,
+                subTitle: 'FiveHigh',
+                buttons: ['OK']
+            });
+            if (marked) {
+                alert.present();
+            }
         });
         dragulaService.over.subscribe(function (value) {
             _this.onOver(value.slice(1));
@@ -100,7 +163,7 @@ var QuizPage = (function () {
         this.removeClass(e, 'ex-moved');
     };
     QuizPage.prototype.onDrop = function (args) {
-        var e = args[0], el = args[1];
+        var e = args[0], el = args[1], target = args[2], source = args[3];
         this.addClass(e, 'ex-moved');
     };
     QuizPage.prototype.onOver = function (args) {
@@ -111,26 +174,84 @@ var QuizPage = (function () {
         var e = args[0], el = args[1], container = args[2];
         this.removeClass(el, 'ex-over');
     };
-    QuizPage.prototype.getQuestions = function () {
+    QuizPage.prototype.mark = function (source, target) {
+        // split out source/target_0[1-5]
+        var sourceList = source.split("_");
+        var targetList = target.split("_");
+        this.results = "Results: ";
+        // mark source with target
+        this.answers[targetList[1]] = sourceList[1];
+        var marked = true;
+        for (var key in this.answers) {
+            var value = this.answers[key];
+            if (value == -1)
+                marked = false;
+            this.results += key + ") " + value + "\n";
+            if (key == value) {
+                this.results += " correct";
+            }
+        }
+        console.log("debug " + this.results);
+        return marked;
+    };
+    QuizPage.prototype.randomize = function () {
+        // place array in this.random order
+        for (var i = this.random.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = this.random[i];
+            this.random[i] = this.random[j];
+            this.random[j] = temp;
+        }
+    };
+    QuizPage.prototype.getSource = function (id, question) {
+        // returns the source name based on id
+        switch (id) {
+            case 1:
+                return question.source_1;
+            case 2:
+                return question.source_2;
+            case 3:
+                return question.source_3;
+            case 4:
+                return question.source_4;
+            case 5:
+                return question.source_5;
+        }
+        return "";
+    };
+    QuizPage.prototype.getQuestions = function (ques_no) {
         var _this = this;
         this.dataProvider.getQuestions().subscribe(function (data) {
             // filter by current question
-            _this.questions = data.filter(function (question) { return question.id === '1'; });
+            //console.log("debug getQuestions"+ques_no);
+            _this.questions = data.filter(function (question) {
+                if (question.id == ques_no) {
+                    // assign sources to array
+                    return true;
+                }
+            });
         }, function (error) {
             console.log(error); // Error getting the data
         });
     };
     QuizPage.prototype.ionViewDidLoad = function () {
         this.category = this.navParams.get('category').name;
-        this.getQuestions();
+        this.ques_no = this.navParams.get('ques_no');
+        this.getQuestions(this.ques_no);
+        this.randomize();
         console.log('ionViewDidLoad QuizPage');
+    };
+    QuizPage.prototype.gotoMark = function () {
+        this.navCtrl.push(this.markPage, {
+            answers: this.answers
+        });
     };
     return QuizPage;
 }());
 QuizPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper">\n    <ion-row>\n      <ion-col col-6>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Title: {{ quizQuestion.title }}</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container">\n        <ion-list id=\'no-drop\' [dragula]=\'"quiz-bag"\'>\n          {{ quizQuestion.answer_01 }}\n        </ion-list>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col col-6>Place with the answer above</ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col col-2 class="container">\n        <ion-list  [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none>\n            {{ quizQuestion.question_01 }}\n          </button>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/quiz/quiz.html"*/,
+        selector: 'page-quiz',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/'<!--\n  Generated template for the QuizPage page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>FiveHigh</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid class="wrapper" *ngFor="let question of questions">\n    <ion-row>\n      <ion-col>Category: {{ category }} </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col>{{ ques_no }}). {{ question.title }} </ion-col>\n    </ion-row >\n    <ion-row>\n      <ion-col class="container" id=\'target_1\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_1 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_{{random[0]}} \' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[0],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_2\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_2 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_{{random[1]}} \' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[1],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_3\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_3 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_{{random[2]}}\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[2],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_4\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_4 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_{{random[3]}}\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[3],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col class="container" id=\'target_5\' [dragula]=\'"quiz-bag"\'>\n        <h4>\n          {{ question.target_5 }}\n        </h4>\n      </ion-col>\n      <ion-col class="container" id=\'sources_{{random[4]}}\' [dragula]=\'"quiz-bag"\'>\n          <button ion-item detail-none >\n            {{ getSource(random[4],question) }}\n          </button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col><button ion-button (click)="gotoMark(results,1)">Mark</button></ion-col>\n    </ion-row>\n\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/quiz/quiz.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -143,15 +264,15 @@ QuizPage = __decorate([
 
 /***/ }),
 
-/***/ 103:
+/***/ 104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_data_data__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__quiz_quiz__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__quiz_quiz__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -189,9 +310,10 @@ var CategoryPage = (function () {
             _this.categories = data;
         });
     };
-    CategoryPage.prototype.gotoQuiz = function (category) {
+    CategoryPage.prototype.gotoQuiz = function (category, ques_no) {
         this.navCtrl.push(this.quizPage, {
-            category: category
+            category: category,
+            ques_no: ques_no
         });
     };
     return CategoryPage;
@@ -199,7 +321,7 @@ var CategoryPage = (function () {
 CategoryPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-category',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/'<!--\n  Generated template for the CategoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Category</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  Pick a Category:\n  <ion-list *ngFor="let category of categories">\n    <button ion-button (click)="gotoQuiz(category)">\n    {{ category.name }}\n  </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/category/category.html"*/,
+        selector: 'page-category',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/category/category.html"*/'<!--\n  Generated template for the CategoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Category</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  Pick a Category:\n  <ion-list *ngFor="let category of categories">\n    <button ion-button (click)="gotoQuiz(category,1)">\n    {{ category.name }}\n  </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/category/category.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -210,7 +332,7 @@ CategoryPage = __decorate([
 
 /***/ }),
 
-/***/ 111:
+/***/ 112:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -223,20 +345,24 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 111;
+webpackEmptyAsyncContext.id = 112;
 
 /***/ }),
 
-/***/ 153:
+/***/ 154:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/category/category.module": [
+		291,
+		2
+	],
+	"../pages/mark/mark.module": [
 		289,
 		1
 	],
 	"../pages/quiz/quiz.module": [
-		288,
+		290,
 		0
 	]
 };
@@ -251,19 +377,19 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 153;
+webpackAsyncContext.id = 154;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 201:
+/***/ 202:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_category__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__category_category__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -288,7 +414,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Welcome to FiveHigh!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Test your knowledge on the Top Five of Everything!\n  <p>\n    <button ion-button [navPush]="categoryPage">Let\'s get Started!</button>\n  </p>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Welcome to FiveHigh!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  Test your knowledge on the Top Five of Everything!\n  <p>\n    <button ion-button [navPush]="categoryPage">Let\'s get Started!</button>\n  </p>\n</ion-content>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
 ], HomePage);
@@ -297,13 +423,13 @@ HomePage = __decorate([
 
 /***/ }),
 
-/***/ 202:
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(222);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -311,30 +437,32 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 221:
+/***/ 222:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(154);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_dragula__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_dragula__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_dragula__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(287);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_category_category__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_quiz_quiz__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_data_data__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_category_category__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_quiz_quiz__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_mark_mark__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_data_data__ = __webpack_require__(77);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -358,12 +486,14 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* MyApp */],
             __WEBPACK_IMPORTED_MODULE_8__pages_home_home__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_9__pages_category_category__["a" /* CategoryPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_quiz_quiz__["a" /* QuizPage */]
+            __WEBPACK_IMPORTED_MODULE_10__pages_quiz_quiz__["a" /* QuizPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_mark_mark__["a" /* MarkPage */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* MyApp */], {}, {
                 links: [
+                    { loadChildren: '../pages/mark/mark.module#MarkPageModule', name: 'MarkPage', segment: 'mark', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/quiz/quiz.module#QuizPageModule', name: 'QuizPage', segment: 'quiz', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/category/category.module#CategoryPageModule', name: 'CategoryPage', segment: 'category', priority: 'low', defaultHistory: [] }
                 ]
@@ -376,13 +506,14 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* MyApp */],
             __WEBPACK_IMPORTED_MODULE_8__pages_home_home__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_9__pages_category_category__["a" /* CategoryPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_quiz_quiz__["a" /* QuizPage */]
+            __WEBPACK_IMPORTED_MODULE_10__pages_quiz_quiz__["a" /* QuizPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_mark_mark__["a" /* MarkPage */]
         ],
         providers: [
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
-            __WEBPACK_IMPORTED_MODULE_11__providers_data_data__["a" /* DataProvider */]
+            __WEBPACK_IMPORTED_MODULE_12__providers_data_data__["a" /* DataProvider */]
         ]
     })
 ], AppModule);
@@ -391,16 +522,16 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 287:
+/***/ 288:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(202);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -428,7 +559,7 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/home/conradh/Code/FiveHigh/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/conradh/Code/FiveHigh/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/home/conradh/Code/Projects/FiveHigh/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/conradh/Code/Projects/FiveHigh/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
@@ -443,12 +574,12 @@ MyApp = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(154);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_do__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_do__ = __webpack_require__(245);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_do__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(247);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -492,5 +623,5 @@ DataProvider = __decorate([
 
 /***/ })
 
-},[202]);
+},[203]);
 //# sourceMappingURL=main.js.map
