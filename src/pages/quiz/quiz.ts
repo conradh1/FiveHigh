@@ -25,13 +25,12 @@ export class QuizPage {
   public questions: any;  // contains question object
   private category; // category name
   private ques_no; // current question
-  private moves = 0;  // counts number of drag/drops
-  private FIVEHIGH = 5;
+  private results;
 
   public random = [1,2,3,4,5];  //used to randomly assign sources
 
-  public results = {
-   // -1, unanswered > 1 incorrect or correct
+  public answers = {
+   // -1, unanswered > 1 answered
    "1": -1,
    "2": -1,
    "3": -1,
@@ -58,8 +57,7 @@ export class QuizPage {
       accepts: function(el, target, source, sibling) {
         // Two rules to note here:
         // 1) A source cannot be dragged into a source.
-        // 2) A target cannot only accept one child target.
-        var id = target.id;
+        // 2) A target cannot only accept one child target.        
         if (target.children.length > 2) {
           return false;
         }
@@ -76,24 +74,15 @@ export class QuizPage {
     dragulaService.drop.subscribe((value: any) => {
       this.onDrop(value.slice(1));
       const [e,el, target, source]  = value;
-      /*this.moves++;
-      var sourceList = source.id.split("_");
-      var targetList = target.id.split("_");
 
-      if (sourceList[1] == targetList[1]) {
-        this.results[target.id] = 1 // response correct
-      }
-      else {
-        this.results[target.id] = 0; // response incorrect
-      }*/
-      this.markOnce(source.id, target.id);
+      var marked = this.mark(source.id, target.id);
 
       let alert = this.alertCtrl.create({
-        title: this.markAll(),
+        title: this.results,
         subTitle: 'FiveHigh',
         buttons: ['OK']
       });
-      if ( this.moves == this.FIVEHIGH ) {
+      if ( marked ) {
         alert.present();
       }
     });
@@ -141,32 +130,30 @@ export class QuizPage {
    this.removeClass(el, 'ex-over');
  }
 
-private markOnce(source, target) {
-  this.moves++; // increment the number of moves
+private mark(source, target) {
 
    // split out source/target_0[1-5]
   var sourceList = source.split("_");
   var targetList = target.split("_");
+  this.results = "Results: ";
 
   // mark source with target
-  this.results[targetList[1]] = sourceList[1];
+  this.answers[targetList[1]] = sourceList[1];
+  var marked = true;
 
-  console.log("debug SOURCE"+source+" TARGET:"+target+" moves"+this.moves+"score"+this.results[targetList[1]]);
-}
-
-private markAll() {
-
-  var msg = "Results ";
-
-  for (let key in this.results) {
-    var value = this.results[key];
-    msg +=  key+") "+value+"\n" ;
-    if ( key == value ) {
-      msg += " correct";
-    }
+  for (let key in this.answers) {
+      var value = this.answers[key];
+      if ( value == -1) marked = false;
+      this.results +=  key+") "+value+"\n" ;
+      if ( key == value ) {
+        this.results += " correct";
+      }
   }
-  return msg;
+  console.log("debug "+this.results);
+
+  return marked;
 }
+
  private randomize() {
 
    // place array in this.random order

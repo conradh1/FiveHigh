@@ -40,11 +40,9 @@ var QuizPage = (function () {
         this.alertCtrl = alertCtrl;
         this.dragulaService = dragulaService;
         this.dataProvider = dataProvider;
-        this.moves = 0; // counts number of drag/drops
-        this.FIVEHIGH = 5;
         this.random = [1, 2, 3, 4, 5]; //used to randomly assign sources
-        this.results = {
-            // -1, unanswered > 1 incorrect or correct
+        this.answers = {
+            // -1, unanswered > 1 answered
             "1": -1,
             "2": -1,
             "3": -1,
@@ -64,8 +62,7 @@ var QuizPage = (function () {
             accepts: function (el, target, source, sibling) {
                 // Two rules to note here:
                 // 1) A source cannot be dragged into a source.
-                // 2) A target cannot only accept one child target.
-                var id = target.id;
+                // 2) A target cannot only accept one child target.        
                 if (target.children.length > 2) {
                     return false;
                 }
@@ -82,23 +79,13 @@ var QuizPage = (function () {
         dragulaService.drop.subscribe(function (value) {
             _this.onDrop(value.slice(1));
             var e = value[0], el = value[1], target = value[2], source = value[3];
-            /*this.moves++;
-            var sourceList = source.id.split("_");
-            var targetList = target.id.split("_");
-      
-            if (sourceList[1] == targetList[1]) {
-              this.results[target.id] = 1 // response correct
-            }
-            else {
-              this.results[target.id] = 0; // response incorrect
-            }*/
-            _this.markOnce(source.id, target.id);
+            var marked = _this.mark(source.id, target.id);
             var alert = _this.alertCtrl.create({
-                title: _this.markAll(),
+                title: _this.results,
                 subTitle: 'FiveHigh',
                 buttons: ['OK']
             });
-            if (_this.moves == _this.FIVEHIGH) {
+            if (marked) {
                 alert.present();
             }
         });
@@ -138,25 +125,25 @@ var QuizPage = (function () {
         var e = args[0], el = args[1], container = args[2];
         this.removeClass(el, 'ex-over');
     };
-    QuizPage.prototype.markOnce = function (source, target) {
-        this.moves++; // increment the number of moves
+    QuizPage.prototype.mark = function (source, target) {
         // split out source/target_0[1-5]
         var sourceList = source.split("_");
         var targetList = target.split("_");
+        this.results = "Results: ";
         // mark source with target
-        this.results[targetList[1]] = sourceList[1];
-        console.log("debug SOURCE" + source + " TARGET:" + target + " moves" + this.moves + "score" + this.results[targetList[1]]);
-    };
-    QuizPage.prototype.markAll = function () {
-        var msg = "Results ";
-        for (var key in this.results) {
-            var value = this.results[key];
-            msg += key + ") " + value + "\n";
+        this.answers[targetList[1]] = sourceList[1];
+        var marked = true;
+        for (var key in this.answers) {
+            var value = this.answers[key];
+            if (value == -1)
+                marked = false;
+            this.results += key + ") " + value + "\n";
             if (key == value) {
-                msg += " correct";
+                this.results += " correct";
             }
         }
-        return msg;
+        console.log("debug " + this.results);
+        return marked;
     };
     QuizPage.prototype.randomize = function () {
         // place array in this.random order
