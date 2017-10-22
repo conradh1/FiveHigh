@@ -25,11 +25,12 @@ export class MarkPage {
   }
   private showMark(question_id, answer_id, question: any) {
     // returns the source name based on id
-    var msg= "Correct! :)";
+    var msg= "";
 
     if ( question_id != answer_id) {
-      msg= "Incorrect. :( Response "+this.getSource(answer_id,question);
+      msg= "Response: "+this.getSource(answer_id,question);
     }
+    
     return msg;
   }
 
